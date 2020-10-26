@@ -3,21 +3,22 @@ window.addEventListener("load", function() {
         response.json().then(function(json) {
             // console.log(json);
             const container = document.getElementById("container");
-            for(let i = 0; i < json.length; i++) {
-                // console.log(json[i]);
-                container.innerHTML += `
+            let astronauts = '';
+            for(astronaut of json) {
+                astronauts += `
                 <div class="astronaut">
                     <div class="bio">
-                        <h3>${json[i].firstName} ${json[i].lastName}</h3>
+                        <h3>${astronaut.firstName} ${astronaut.lastName}</h3>
                         <ul>
-                            <li>Hours in space: ${json[i].hoursInSpace}</li>
-                            <li>Active: ${json[i].active}</li>
-                            <li>Skills: ${json[i].skills.join(", ")}</li>
+                            <li>Hours in space: ${astronaut.hoursInSpace}</li>
+                            <li>Active: ${astronaut.active}</li>
+                            <li>Skills: ${astronaut.skills.join(", ")}</li>
                         </ul>
                     </div>
-                    <img class="avatar" src="${json[i].picture}">
+                    <img class="avatar" src="${astronaut.picture}">
                 </div>`;
             }
+            container.innerHTML = astronauts;
             //Add a count of astronauts to the page.
             container.innerHTML +=
             `<div class="astronautCount">
